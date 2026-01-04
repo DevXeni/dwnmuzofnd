@@ -1,0 +1,26 @@
+{
+
+  "manifest_version": 2,
+  "name": "Muz0fond downloader",
+  "description": "Download file from muz0fond.fm while play button are pressed",
+  "version": "1.0",
+  "homepage_url": "https://github.com/DevXeni/dwnmuzofnd",
+  "icons": {
+    "48": "icons/logo.png"
+  },
+
+  "permissions": ["downloads"],
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["muzofond.fm"],
+      "js": ["content.js"]
+    }
+  ],
+  
+  "default_locale": "en"
+}
