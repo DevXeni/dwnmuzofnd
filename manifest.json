@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Muz0fondDownloader",
   "description": "Download file from muz0fond.fm while play button are pressed",
-  "version": "1.0",
+  "version": "1.0.1",
   "author": "DevXeni",
   "homepage_url": "https://github.com/DevXeni/dwnmuzofnd",
   "browser_specific_settings": {
