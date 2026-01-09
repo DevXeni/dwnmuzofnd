@@ -21,7 +21,7 @@ function downloadFile(message) {
     }
     let downloading = browser.downloads.download({
         url: message.url,
-        filename: message.name,
+        filename: message.name + ".mp3",
         conflictAction: "uniquify",
         saveAs: true
     });
