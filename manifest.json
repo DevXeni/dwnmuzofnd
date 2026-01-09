@@ -10,7 +10,8 @@
         "id": "@Muz0fondDownloader.DevXeni",
         "data_collection_permissions": {
           "required":["none"]
-        }
+        },
+        "update_url": "https://github.com/DevXeni/dwnmuzofnd/blob/master/updates.json"
       }     
   }, 
   "icons": {
