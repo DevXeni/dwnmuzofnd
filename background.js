@@ -17,12 +17,11 @@ function onFailed(error) {
 
 function downloadFile(message) {
     if(message === undefined || message === null) {
-        console.log("Message not found");
         return false
     }
     let downloading = browser.downloads.download({
         url: message.url,
-        filename: fileName,
+        filename: message.name,
         conflictAction: "uniquify",
         saveAs: true
     });
