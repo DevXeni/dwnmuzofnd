@@ -7,29 +7,36 @@
 * @copyright Copyright (c) 2026, Kseniya Nikula. All rights reserved.
 *
 */
-const allDownloadableLinks = document.querySelectorAll("ul.mainSongs > li.item");
-document.addEventListener("readystatechange", (event) => {
-    if(document.readyState == "complete") {         
+
+domReadyPromise = new Promise((resolve) => {
+    if (document.readyState !== "loading") {
+        resolve();
+    } else {
+        document.addEventListener("DOMContentLoaded", resolve);
+    }
+});
+domReadyPromise.then(() => {
+    let allDownloadableLinks = document.querySelectorAll("ul.songs > li.item"); 
+    if(allDownloadableLinks.length != 0){  
         for(let i=0; i < allDownloadableLinks.length-1; i++){
-            let linkContainer = allDownloadableLinks[i].querySelector("li.play");
-            let clickableElement = allDownloadableLinks[i].querySelector("a.playOtherLink");
-            clickableElement.href = "";
-            clickableElement.target = "";
-            clickableElement.setAttribute("data-url",linkContainer.getAttribute("data-url"));
-            console.log(clickableElement);
+            let linkUrl = allDownloadableLinks[i].querySelector("li.play").getAttribute("data-url");
+            let track = allDownloadableLinks[i].querySelector("span.track");
+            let fileName = track.innerText
+            let el = allDownloadableLinks[i].querySelector("a.zvukDlButton");
+            if(el) {
+                el.href = "";
+                el.target = "";
+                //track.insertAdjacentHTML('beforeend', "&nbsp;Скачать&nbsp;файл&nbsp;");
+                el.addEventListener("click",function(event){
+                    event.preventDefault();
+                    if (linkUrl && fileName) {
+                        browser.runtime.sendMessage({url:linkUrl,name: fileName})
+                    }           
+                }, false);
+            }
+            
         }
     }
-}, false);
-for(let i=0; i < allDownloadableLinks.length-1; i++){
-    let clickableLink = allDownloadableLinks[i].querySelector("a.playOtherLink");
-    let fileName = allDownloadableLinks[i].querySelector("span.track").innerText;
-    clickableLink.addEventListener("click", function(event){
-        event.preventDefault();
-        let fileToDownload = event.currentTarget.getAttribute("data-url");
-        console.log(fileToDownload);
-        if (fileToDownload && fileName) {
-            browser.runtime.sendMessage({url:fileToDownload,name:fileName })
-        }           
-    }, false);    
-}
+}); 
+
 
