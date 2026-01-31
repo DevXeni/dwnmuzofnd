@@ -8,11 +8,11 @@
 *
 */
 function onStartedDownload(id) {
-    console.log("Started downloading: ${id}");
+    console.log(`Started downloading: ${id}`);
 }
 
 function onFailed(error) {
-    console.log("Download failed: ${error}");
+    console.log(`Download failed: ${error}`);
 }
 
 function downloadFile(message) {

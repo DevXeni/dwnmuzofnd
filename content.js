@@ -22,15 +22,15 @@ domReadyPromise.then(() => {
             let linkUrl = allDownloadableLinks[i].querySelector("li.play").getAttribute("data-url");
             let track = allDownloadableLinks[i].querySelector("span.track");
             let fileName = track.innerText
+            fileName = fileName.replace(/[/\\?%*:|"<>]/g, '-');
             let el = allDownloadableLinks[i].querySelector("a.zvukDlButton");
             if(el) {
                 el.href = "";
                 el.target = "";
-                //track.insertAdjacentHTML('beforeend', "&nbsp;Скачать&nbsp;файл&nbsp;");
                 el.addEventListener("click",function(event){
                     event.preventDefault();
                     if (linkUrl && fileName) {
-                        browser.runtime.sendMessage({url:linkUrl,name: fileName})
+                        browser.runtime.sendMessage({url:linkUrl,name:`${fileName}`})
                     }           
                 }, false);
             }
